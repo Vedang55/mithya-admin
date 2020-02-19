@@ -11,6 +11,15 @@ const EventForm = (props) => {
         setData(props.data);
     }, [props.data]);
 
+
+    const newEvent = () => {
+        setData(state => {
+            const newData = { ...state };
+            newData[props.index].push({ name: '', type: props.index, rules: [] });
+            return newData;
+        })
+    }
+
     const newrule = (itemIndex) => {
         setData(state => {
             const newData = { ...state };
@@ -66,9 +75,11 @@ const EventForm = (props) => {
             {data[props.index].map((item, itemIndex) => {
                 return (
                     <div className={classes.RuleCard}>
-                        Name: <input type='text' value={item.name} onChange={(e) => { namechange(e, itemIndex) }} />
+                        Event Name: <input type='text' value={item.name} onChange={(e) => { namechange(e, itemIndex) }} />
                         <button>Delete</button>
+
                         <div className={classes.RuleContainer}>
+                            Rules
                             {item.rules.map((item, ruleIndex) => {
                                 return (
                                     <div style={{ display: 'flex', margin: '5px' }}>
@@ -83,6 +94,8 @@ const EventForm = (props) => {
                     </div>
                 );
             })}
+
+            <button onClick={newEvent}>New Event</button>
         </div>
     );
 }
