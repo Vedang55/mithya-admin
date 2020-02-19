@@ -1,0 +1,52 @@
+.Container { 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.RuleCard {
+    background-color: gray;
+    padding: 10px;
+}
+
+.Tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.Tabs > h3 {
+    cursor: pointer;
+    padding: 10px;
+    color: white;
+}
+
+.Tabs > h3:hover{
+    background-color: red;
+}
+
+.RuleContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.RuleContainer > input{
+    margin: 5px;
+}
+
+
+.Active {
+    background-color: orange;   
+}
+
+.push {
+    color: white;
+    cursor: pointer;
+    background-color: olivedrab;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.push:hover {
+    background-color: red;
+}
