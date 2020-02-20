@@ -20,27 +20,27 @@ const EventForm = (props) => {
         })
     }
 
-    const newrule = (itemIndex) => {
-        setData(state => {
-            const newData = { ...state };
-            newData[props.index][itemIndex].rules.push('');
-            return newData;
-        })
-    }
+    // const newrule = (itemIndex) => {
+    //     setData(state => {
+    //         const newData = { ...state };
+    //         newData[props.index][itemIndex].rules.push('');
+    //         return newData;
+    //     })
+    // }
 
-    const delrule = (itemIndex, ruleIndex) => {
-        setData(state => {
-            const newData = { ...state };
-            newData[props.index][itemIndex].rules.splice(ruleIndex, 1);
-            return newData;
-        })
-    }
+    // const delrule = (itemIndex, ruleIndex) => {
+    //     setData(state => {
+    //         const newData = { ...state };
+    //         newData[props.index][itemIndex].rules.splice(ruleIndex, 1);
+    //         return newData;
+    //     })
+    // }
 
-    const txtchange = (newtxt, itemIndex, ruleIndex) => {
-        newtxt.persist();
+    const ruleChange = (e, itemIndex) => {
+        e.persist();
         setData((state) => {
             const newData = { ...state };
-            newData[props.index][itemIndex].rules[ruleIndex] = newtxt.target.value;
+            newData[props.index][itemIndex].rules = e.target.value;
             return newData;
         })
     }
@@ -68,6 +68,7 @@ const EventForm = (props) => {
             });
 
     }
+    console.log(data[props.index][0].rules);
 
     return (
         <div>
@@ -80,16 +81,8 @@ const EventForm = (props) => {
 
                         <div className={classes.RuleContainer}>
                             Rules
-                            {item.rules.map((item, ruleIndex) => {
-                                return (
-                                    <div style={{ display: 'flex', margin: '5px' }}>
-                                        <input style={{ flexGrow: 1 }} type='text' value={item} onChange={(e) => { txtchange(e, itemIndex, ruleIndex) }} />
-                                        <button onClick={() => { delrule(itemIndex, ruleIndex) }}>Delete rule</button>
-                                    </div>
-                                );
-                            })}
+                            <textarea rows='10' value={item.rules} onChange={(e)=>{ruleChange(e,itemIndex)}}/>
                         </div>
-                        <button onClick={newrule.bind(this, itemIndex)}>New Rule</button>
 
                     </div>
                 );
@@ -105,6 +98,7 @@ const Main = (props) => {
     const [activeTab, setActiveTab] = useState(0);
     const [data, setData] = useState([]);
     const [loading, setLoadng] = useState(true);
+
     useEffect(() => {
         let unsubscribe = db.collection("data").onSnapshot(function () {
             fetchData();
