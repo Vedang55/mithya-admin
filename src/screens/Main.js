@@ -68,7 +68,6 @@ const EventForm = (props) => {
             });
 
     }
-    console.log(data[props.index][0].rules);
 
     return (
         <div>
