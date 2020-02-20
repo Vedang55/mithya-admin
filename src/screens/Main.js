@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../firestore';
 import classes from './Main.module.css'
+
+import ClipLoader from "react-spinners/ClipLoader";
 var db = firebase.firestore();
 
 
 const EventForm = (props) => {
     const [data, setData] = useState(props.data);
+    const [sending, setSending] = useState(false);
 
     useEffect(() => {
         setData(props.data);
@@ -55,6 +58,7 @@ const EventForm = (props) => {
     }
 
     const pushFirestore = () => {
+        setSending(true);
         db.collection("data").doc("data").update({
             event_data: [...data.ace, ...data.king, ...data.queen, ...data.jack],
         })
@@ -65,13 +69,19 @@ const EventForm = (props) => {
             .catch(function (error) {
                 console.error("Error writing document: ", error);
                 alert("Error writing document: ", error);
-            });
+            })
+            .finally(() => { setSending(false) });
 
     }
 
     return (
         <div>
-            <h1 onClick={pushFirestore} className={classes.push}>Push Changes to firestore</h1>
+            <ClipLoader
+                size={80}
+                color={"#123abc"}
+                loading={sending}
+            />
+            <h1 onClick={pushFirestore} className={classes.push} style={{ display: sending ? 'none' : 'block' }}>Push Changes to firestore</h1>
             {data[props.index].map((item, itemIndex) => {
                 return (
                     <div className={classes.RuleCard}>
@@ -80,7 +90,7 @@ const EventForm = (props) => {
 
                         <div className={classes.RuleContainer}>
                             Rules
-                            <textarea rows='10' value={item.rules} onChange={(e)=>{ruleChange(e,itemIndex)}}/>
+                            <textarea rows='10' value={item.rules} onChange={(e) => { ruleChange(e, itemIndex) }} />
                         </div>
 
                     </div>
@@ -113,6 +123,8 @@ const Main = (props) => {
         db.collection("data").doc('data').get().then((querySnapshot) => {
             const fetchedData = querySnapshot.data().event_data;
             processData(fetchedData);
+        }).then(() => {
+            setLoadng(false);
         });
     }
 
@@ -186,7 +198,11 @@ const Main = (props) => {
         );
     }
     else {
-        return (null);
+        return (<ClipLoader
+            size={80}
+            color={"#123abc"}
+            loading={loading}
+        />);
     }
 }
 
