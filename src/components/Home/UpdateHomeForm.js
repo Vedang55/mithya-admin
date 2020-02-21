@@ -5,7 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 var db = firebase.database();
 const eventRef = db.ref('events/');
 
-const UpdateScheduleForm = (props) => {
+const UpdateHomeForm = (props) => {
     const [rulesTextarea, setRulesTextarea] = useState('');
     const [eventNameInput, setEventNameInput] = useState('');
     const [selectValue, setSelectValue] = useState('ACE');
@@ -50,8 +50,9 @@ const UpdateScheduleForm = (props) => {
     return (
         <div className="form-scoreboard">
             <form onSubmit={handleSubmit}>
+                {/* Event Name Row */}
                 <div className="form-row">
-                    <div className="form-group col-md-3">
+                    <div className="form-group col-md-12">
                         <label for="inputEmail4">EVENT NAME</label>
                         <input type="text"
                             className="form-control"
@@ -62,46 +63,51 @@ const UpdateScheduleForm = (props) => {
                             required
                         />
                     </div>
-                    <div className="form-group col-md-2">
-                        <label for="inputEmail4">DATE</label>
-                        <input type="date"
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-3">
+                        <label for="inputEmail4">COMP</label>
+                        <input type="text"
                             className="form-control"
                             // id="inputEmail4"
-                            // placeholder="eg. Antakshari"
-                            onChange={eventNameInputChange}
-                            value={eventNameInput}
-                            required
-                        />
-                    </div>
-                    <div className="form-group col-md-2">
-                        <label for="inputEmail4">TIME</label>
-                        <input type="time"
-                            className="form-control"
-                            // id="inputEmail4"
-                            // placeholder="eg. Antakshari"
+                            placeholder="eg. 2000"
                             onChange={eventNameInputChange}
                             value={eventNameInput}
                             required
                         />
                     </div>
                     <div className="form-group col-md-3">
-                        <label for="inputEmail4">VENUE</label>
+                        <label for="inputEmail4">MECH</label>
                         <input type="text"
                             className="form-control"
                             // id="inputEmail4"
-                            // placeholder="eg. Antakshari"
+                            placeholder="eg. 2000"
                             onChange={eventNameInputChange}
                             value={eventNameInput}
                             required
                         />
                     </div>
-                    <div className="form-group col-md-2">
-                        <label for="inputState">DAY</label>
-                        <select id="inputState" className="form-control" onChange={selectChange} value={selectValue}>
-                            <option>DAY-1</option>
-                            <option>DAY-2</option>
-                            <option>DAY-3</option>
-                        </select>
+                    <div className="form-group col-md-3">
+                        <label for="inputEmail4">ETC</label>
+                        <input type="text"
+                            className="form-control"
+                            // id="inputEmail4"
+                            placeholder="eg. 2000"
+                            onChange={eventNameInputChange}
+                            value={eventNameInput}
+                            required
+                        />
+                    </div>
+                    <div className="form-group col-md-3">
+                        <label for="inputEmail4">IT</label>
+                        <input type="text"
+                            className="form-control"
+                            // id="inputEmail4"
+                            placeholder="eg. 2000"
+                            onChange={eventNameInputChange}
+                            value={eventNameInput}
+                            required
+                        />
                     </div>
                 </div>
 
@@ -119,4 +125,4 @@ const UpdateScheduleForm = (props) => {
 }
 
 
-export default (UpdateScheduleForm)
+export default (UpdateHomeForm)

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import EventTab from '../../components/EventTab/EventTab'
-import AddEventForm from '../../components/EventTab/AddEventForm'
+import HomeTab from '../../components/Home/HomeTab'
+import UpdateHomeForm from '../../components/Home/UpdateHomeForm'
 import Layout from '../../layouts/Layout'
 
 
@@ -11,6 +11,8 @@ const Home = (props) => {
     return (
         <Layout>
             <div className="container">
+                <UpdateHomeForm />
+                <HomeTab />
             </div>
         </Layout>
     );

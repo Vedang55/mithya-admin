@@ -4,7 +4,7 @@ import {
     Nav
 } from 'react-bootstrap'
 
-import EventTab from '../../components/EventTab/EventTab'
+import ScheduleTab from '../../components/Schedule/ScheduleTab'
 import UpdateScheduleForm from '../../components/Schedule/UpdateScheduleForm'
 import Layout from '../../layouts/Layout'
 
@@ -18,6 +18,8 @@ const Schedule = (props) => {
 
         <Layout>
             <div className="container">
+                <UpdateScheduleForm />
+                <ScheduleTab />
             </div>
         </Layout>
     );

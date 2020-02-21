@@ -1,7 +1,8 @@
 import React from 'react'
 import {
     Navbar,
-    Nav
+    Nav,
+    Button
 } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 
@@ -16,7 +17,7 @@ const Layout = (props) => {
                 <Navbar.Collapse id="navbarSupportedContent">
                     <Nav className="ml-auto mr-3">
                         <Nav.Link>
-                            <NavLink to="/" exact className={'navlinkr'} activeClassName={'active'}>
+                            <NavLink to="/home" exact className={'navlinkr'} activeClassName={'active'}>
                                 Home
                             </NavLink>
                         </Nav.Link>
@@ -31,7 +32,7 @@ const Layout = (props) => {
                                 Schedule
                             </NavLink>
                         </Nav.Link>
-
+                        <Button variant="danger">LOGOUT</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
