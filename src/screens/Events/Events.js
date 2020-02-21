@@ -4,8 +4,14 @@ import {
     Nav
 } from 'react-bootstrap'
 import EventTab from '../../components/EventTab/EventTab'
+import AddEventForm from '../../components/EventTab/AddEventForm'
+import firebase from '../../firestore';
+
+var db = firebase.database();
+
 
 const Events = (props) => {
+
     return (
         <React.Fragment>
             <Navbar bg="light" expand="lg" bg='dark' variant='dark'>
@@ -26,34 +32,8 @@ const Events = (props) => {
             {/* // <!-- Multi Tab-- > */}
             <div className="container">
                 {/* <!-- Form --> */}
-                <div className="form-scoreboard">
-                    <form>
-                        <div className="form-row">
-                            <div className="form-group col-md-8">
-                                <label for="inputEmail4">EVENT NAME</label>
-                                <input type="text" className="form-control" id="inputEmail4" placeholder="eg. Antakshari" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label for="inputState">CATEGORY</label>
-                                <select id="inputState" className="form-control">
-                                    <option selected>ACE</option>
-                                    <option>KING</option>
-                                    <option>QUEEN</option>
-                                    <option>JACK</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label for="inputAddress">RULES</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="10"
-                                placeholder="Type Each rule on separate line"></textarea>
-                        </div>
-
-                        <button type="submit" className="btn btn-primary">ADD EVENT</button>
-                    </form>
-                </div>
-
-                <EventTab/>
+                <AddEventForm />
+                <EventTab />
 
 
             </div>
@@ -64,7 +44,6 @@ const Events = (props) => {
                         <p>Designed & Developed By : ALPHACODE</p>
                     </div>
                 </div>
-
             </footer>
         </React.Fragment>
     );
