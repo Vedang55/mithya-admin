@@ -1,21 +1,26 @@
 import React from 'react'
+import {
+    Navbar,
+    Nav
+} from 'react-bootstrap'
 
 import EventTab from '../../components/EventTab/EventTab'
-import AddEventForm from '../../components/EventTab/AddEventForm'
+import UpdateScheduleForm from '../../components/Schedule/UpdateScheduleForm'
 import Layout from '../../layouts/Layout'
 
 
 
-const Events = (props) => {
+const Schedule = (props) => {
 
     return (
+
+
+
         <Layout>
             <div className="container">
-                <AddEventForm />
-                <EventTab />
             </div>
         </Layout>
     );
 }
 
-export default Events;
+export default Schedule;

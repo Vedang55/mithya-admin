@@ -6,16 +6,14 @@ import Layout from '../../layouts/Layout'
 
 
 
-const Events = (props) => {
+const Home = (props) => {
 
     return (
         <Layout>
             <div className="container">
-                <AddEventForm />
-                <EventTab />
             </div>
         </Layout>
     );
 }
 
-export default Events;
+export default Home;

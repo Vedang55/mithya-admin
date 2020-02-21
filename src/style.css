@@ -71,3 +71,8 @@ footer{
 /* Media Queries */
 
 /* Media Queries */
+
+
+.active.navlinkr {
+    color: white;
+}
