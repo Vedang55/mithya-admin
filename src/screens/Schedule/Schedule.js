@@ -3,12 +3,13 @@ import {
     Navbar,
     Nav
 } from 'react-bootstrap'
+
 import EventTab from '../../components/EventTab/EventTab'
-import AddEventForm from '../../components/EventTab/AddEventForm'
+import UpdateScheduleForm from '../../components/Schedule/UpdateScheduleForm'
 
 
 
-const Events = (props) => {
+const Schedule = (props) => {
 
     return (
         <React.Fragment>
@@ -19,8 +20,8 @@ const Events = (props) => {
                 <Navbar.Collapse id="navbarSupportedContent">
                     <Nav className="ml-auto mr-3">
                         <Nav.Link href="#">Home</Nav.Link>
-                        <Nav.Link active href="#">Events</Nav.Link>
-                        <Nav.Link href="#">Schedule</Nav.Link>
+                        <Nav.Link href="#">Events</Nav.Link>
+                        <Nav.Link active href="#">Schedule</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -30,7 +31,7 @@ const Events = (props) => {
             {/* // <!-- Multi Tab-- > */}
             <div className="container">
                 {/* <!-- Form --> */}
-                <AddEventForm />
+                <UpdateScheduleForm />
                 <EventTab />
 
 
@@ -47,4 +48,4 @@ const Events = (props) => {
     );
 }
 
-export default Events;
+export default Schedule;

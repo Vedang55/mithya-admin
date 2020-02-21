@@ -57,9 +57,9 @@ const UpdateModel = (props) => {
 
     return (
 
-        <div style={{padding:'40px'}}>
+        <div style={{ padding: '40px' }}>
             <Modal show={props.show} onHide={props.handleClose} animation={true}>
-                <form onSubmit={handleSubmit}>
+                <form style={{ padding: '40px' }} onSubmit={handleSubmit}>
                     <div className="form-row">
                         <div className="form-group col-md-8">
                             <label for="inputEmail4">EVENT NAME</label>
