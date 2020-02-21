@@ -3,6 +3,7 @@ import {
     Navbar,
     Nav
 } from 'react-bootstrap'
+import EventTab from '../../components/EventTab/EventTab'
 
 const Events = (props) => {
     return (
@@ -52,123 +53,8 @@ const Events = (props) => {
                     </form>
                 </div>
 
-                <div className="mulday">
-                    {/* <!-- Nav tabs --> */}
-                    <ul className="nav nav-tabs justify-content-center">
-                        <li className="nav-item">
-                            <a className="nav-link active" data-toggle="tab" href="#home">ACE</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="tab" href="#menu1">KING</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="tab" href="#menu2">QUEEN</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="tab" href="#menu3">JACK</a>
-                        </li>
-                    </ul>
+                <EventTab/>
 
-                    {/* <!-- Tab panes --> */}
-                    <div className="tab-content">
-                        <div className="tab-pane container active" id="home">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <div className="card" style={{ width: '100%' }}>
-                                        <img src="IMAGES/pubg.png" className="card-img-top" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title">PUBG</h5>
-                                            <p className="card-text">
-                                                Rules :
-                                    </p>
-                                            <p className="card-text">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, perferendis
-                                                maiores reiciendis, perspiciatis, enim quo doloribus nam optio adipisci odio
-                                                libero nesciunt. Suscipit, voluptatibus? Possimus itaque ipsa inventore vel
-                                                odio.
-                                    </p>
-                                            <a href="#" className="btn btn-primary">Update Event</a> &nbsp; <a href="#"
-                                                className="btn btn-danger">Delete Event</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div className="tab-pane container fade" id="menu1">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <div className="card" style={{ width: '100%' }}>
-                                        <img src="IMAGES/pubg.png" className="card-img-top" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title">PUBG</h5>
-                                            <p className="card-text">
-                                                Rules :
-                                    </p>
-                                            <p className="card-text">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, perferendis
-                                                maiores reiciendis, perspiciatis, enim quo doloribus nam optio adipisci odio
-                                                libero nesciunt. Suscipit, voluptatibus? Possimus itaque ipsa inventore vel
-                                                odio.
-                                    </p>
-                                            <a href="#" className="btn btn-primary">Update Event</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                        <div className="tab-pane container fade" id="menu2">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <div className="card" style={{ width: '100%' }}>
-                                        <img src="IMAGES/pubg.png" className="card-img-top" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title">PUBG</h5>
-                                            <p className="card-text">
-                                                Rules :
-                                    </p>
-                                            <p className="card-text">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, perferendis
-                                                maiores reiciendis, perspiciatis, enim quo doloribus nam optio adipisci odio
-                                                libero nesciunt. Suscipit, voluptatibus? Possimus itaque ipsa inventore vel
-                                                odio.
-                                    </p>
-                                            <a href="#" className="btn btn-primary">Update Event</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="tab-pane container fade" id="menu3">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <div className="card" style={{ width: '100%' }}>
-                                        <img src="IMAGES/pubg.png" className="card-img-top" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title">PUBG</h5>
-                                            <p className="card-text">
-                                                Rules :
-                                    </p>
-                                            <p className="card-text">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, perferendis
-                                                maiores reiciendis, perspiciatis, enim quo doloribus nam optio adipisci odio
-                                                libero nesciunt. Suscipit, voluptatibus? Possimus itaque ipsa inventore vel
-                                                odio.
-                                    </p>
-                                            <a href="#" className="btn btn-primary">Update Event</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
             <footer>
