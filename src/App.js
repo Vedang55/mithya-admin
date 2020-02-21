@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './style.css';
 import Main from './screens/Main'
+import Events from './screens/Events/Events'
 
 function App() {
   return (
-    <Main />
+    <Events />
   );
 }
 

@@ -1,0 +1,73 @@
+/* Resetting */
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+/* Login */
+.loginSection{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #eee;
+}
+.login{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #111;
+    padding: 30px;
+    background-color: #445;
+    color: #fff;
+}
+.login h1{
+    font-size: 30px;
+    font-weight: bolder;
+}
+.login .loginbtn{
+    background-color: #111;
+    color: #fff;
+    border:0;
+}
+
+
+/* Login */
+
+/* Homepage */
+
+/* Homepage */
+
+/* Events */
+
+/* Events */
+
+/* Scores */
+.form-scoreboard{
+    margin-top: 30px;
+}
+.card{
+    margin-top: 10px;
+}
+.mulday{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+/* Scores */
+
+/* Footer */
+footer{
+    text-align: center;
+    background-color: #333;
+    padding: 20px 20px 0 0;
+    color:#fff;
+}
+/* Footer */
+
+/* Media Queries */
+
+/* Media Queries */
