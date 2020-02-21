@@ -5,9 +5,7 @@ import {
 } from 'react-bootstrap'
 import EventTab from '../../components/EventTab/EventTab'
 import AddEventForm from '../../components/EventTab/AddEventForm'
-import firebase from '../../firestore';
 
-var db = firebase.database();
 
 
 const Events = (props) => {
@@ -15,14 +13,14 @@ const Events = (props) => {
     return (
         <React.Fragment>
             <Navbar bg="light" expand="lg" bg='dark' variant='dark'>
-                <Navbar.Brand href="homepage.html">MITHYA 2020</Navbar.Brand>
+                <Navbar.Brand href="#">MITHYA 2020</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarSupportedContent" />
 
                 <Navbar.Collapse id="navbarSupportedContent">
                     <Nav className="ml-auto mr-3">
-                        <Nav.Link href="homepage.html">Home</Nav.Link>
-                        <Nav.Link href="events.html">Events</Nav.Link>
-                        <Nav.Link href="schedule.html">Schedule</Nav.Link>
+                        <Nav.Link href="#">Home</Nav.Link>
+                        <Nav.Link href="#">Events</Nav.Link>
+                        <Nav.Link href="#">Schedule</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

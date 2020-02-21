@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react'
+import {
+    Modal, Button
+} from 'react-bootstrap'
 import firebase from '../../firestore';
 import ClipLoader from "react-spinners/ClipLoader";
+
 
 var db = firebase.database();
 const eventRef = db.ref('events/');
 
-const AddEventForm = (props) => {
-    const [rulesTextarea, setRulesTextarea] = useState('');
-    const [eventNameInput, setEventNameInput] = useState('');
-    const [selectValue, setSelectValue] = useState('ACE');
+const UpdateModel = (props) => {
+
+    const [rulesTextarea, setRulesTextarea] = useState(props.data.rules);
+    const [eventNameInput, setEventNameInput] = useState(props.data.name);
+    const [selectValue, setSelectValue] = useState(props.data.type.toUpperCase());
     const [sending, setSending] = useState(false);
 
 
 
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         setSending(true);
-        var newEventRef = eventRef.push();
-        newEventRef.set({
+        var updateEventRef = db.ref('events/'+props.data.key);
+        updateEventRef.set({
             name: eventNameInput,
             type: selectValue,
             rules: rulesTextarea
         }, (error) => {
             setSending(false);
             if (error) {
-                alert('failed to add event, try again');
+                alert('failed to update event, try again');
             } else {
-                alert(`event ${eventNameInput} added sucessfully`);
-                setRulesTextarea('');
-                setEventNameInput('');
+                alert(`event ${eventNameInput} updated sucessfully`);
             }
         });
     }
@@ -47,8 +50,10 @@ const AddEventForm = (props) => {
     }
 
 
+
     return (
-        <div className="form-scoreboard">
+        <React.Fragment>
+            <Modal show={props.show} onHide={props.handleClose} animation={false}>
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="form-group col-md-8">
@@ -82,18 +87,26 @@ const AddEventForm = (props) => {
                         required>
                     </textarea>
                 </div>
+
+
+            </form>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={props.handleClose}>
+                        Close
+                </Button>
                 {sending ? (<ClipLoader
                     size={30}
                     color={"#123abc"}
                     loading={sending}
                 />)
-                    : (<button type="submit" className="btn btn-primary">ADD EVENT</button>)}
+                    : (<button type="submit" onClick={handleSubmit} className="btn btn-primary">Save Changes</button>)}
+                </Modal.Footer>
+            </Modal>
 
-            </form>
-        </div>
 
+        </React.Fragment>
     );
 }
 
 
-export default (AddEventForm)
+export default UpdateModel;
