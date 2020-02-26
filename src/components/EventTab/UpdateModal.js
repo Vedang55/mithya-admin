@@ -13,6 +13,7 @@ const UpdateModel = (props) => {
 
     const [rulesTextarea, setRulesTextarea] = useState(props.data.rules);
     const [eventNameInput, setEventNameInput] = useState(props.data.name);
+    const [imageName, setImageName] = useState('');
     const [selectValue, setSelectValue] = useState(props.data.type.toUpperCase());
     const [sending, setSending] = useState(false);
 
@@ -20,6 +21,7 @@ const UpdateModel = (props) => {
         setRulesTextarea(props.data.rules);
         setEventNameInput(props.data.name);
         setSelectValue(props.data.type.toUpperCase());
+        setImageName(props.data.image);
     }, [props.data]);
 
 
@@ -30,7 +32,8 @@ const UpdateModel = (props) => {
         updateEventRef.set({
             name: eventNameInput,
             type: selectValue,
-            rules: rulesTextarea
+            rules: rulesTextarea,
+            image: imageName
         }, (error) => {
             setSending(false);
             if (error) {
@@ -43,6 +46,10 @@ const UpdateModel = (props) => {
 
     const rulesTextareaChange = (event) => {
         setRulesTextarea(event.target.value);
+    }
+
+    const imageTextChange = (event) => {
+        setImageName(event.target.value);
     }
 
     const eventNameInputChange = (event) => {
@@ -70,6 +77,15 @@ const UpdateModel = (props) => {
                                 onChange={eventNameInputChange}
                                 value={eventNameInput}
                                 required
+                            />
+
+                            <br />
+                            <label>Image name</label>
+                            <input type="text"
+                                className="form-control"
+                                placeholder="image name"
+                                onChange={imageTextChange}
+                                value={imageName}
                             />
                         </div>
                         <div className="form-group col-md-4">

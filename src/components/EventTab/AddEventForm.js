@@ -8,6 +8,7 @@ const eventRef = db.ref('events/');
 const AddEventForm = (props) => {
     const [rulesTextarea, setRulesTextarea] = useState('');
     const [eventNameInput, setEventNameInput] = useState('');
+    const [imageName, setImageName] = useState('');
     const [selectValue, setSelectValue] = useState('ACE');
     const [sending, setSending] = useState(false);
 
@@ -21,7 +22,8 @@ const AddEventForm = (props) => {
         newEventRef.set({
             name: eventNameInput,
             type: selectValue,
-            rules: rulesTextarea
+            rules: rulesTextarea,
+            image: imageName
         }, (error) => {
             setSending(false);
             if (error) {
@@ -36,6 +38,10 @@ const AddEventForm = (props) => {
 
     const rulesTextareaChange = (event) => {
         setRulesTextarea(event.target.value);
+    }
+
+    const imageTextChange = (event) => {
+        setImageName(event.target.value);
     }
 
     const eventNameInputChange = (event) => {
@@ -61,6 +67,15 @@ const AddEventForm = (props) => {
                             value={eventNameInput}
                             required
                         />
+                        <br/>
+                        <label>Image name</label>
+                        <input type="text"
+                            className="form-control"
+                            placeholder="image name"
+                            onChange={imageTextChange}
+                            value={imageName}
+                        />
+
                     </div>
                     <div className="form-group col-md-4">
                         <label for="inputState">CATEGORY</label>

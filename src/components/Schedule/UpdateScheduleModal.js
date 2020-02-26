@@ -7,30 +7,35 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 
 var db = firebase.database();
-const eventRef = db.ref('events/');
+const schduleRef = db.ref('schedule/');
 
 const UpdateScheduleModal = (props) => {
 
-    const [rulesTextarea, setRulesTextarea] = useState(props.data.rules);
-    const [eventNameInput, setEventNameInput] = useState(props.data.name);
-    const [selectValue, setSelectValue] = useState(props.data.type.toUpperCase());
+
+
+    const [timeField, setTimeField] = useState('');
+    const [eventNameInput, setEventNameInput] = useState('');
+    const [selectValue, setSelectValue] = useState('1');
+    const [venueField, setVenue] = useState('');
     const [sending, setSending] = useState(false);
 
-    useEffect(() => {
-        setRulesTextarea(props.data.rules);
-        setEventNameInput(props.data.name);
-        setSelectValue(props.data.type.toUpperCase());
-    }, [props.data]);
 
+    useEffect(() => {
+        setVenue(props.data.venue);
+        setEventNameInput(props.data.name);
+        setSelectValue(props.data.day.toUpperCase());
+        setTimeField(props.data.time);
+    }, [props.data]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setSending(true);
-        var updateEventRef = db.ref('events/' + props.data.key);
-        updateEventRef.set({
+        var updateSechRef = db.ref('schedule/' + props.data.key);
+        updateSechRef.set({
             name: eventNameInput,
-            type: selectValue,
-            rules: rulesTextarea
+            day: selectValue,
+            time: timeField,
+            venue: venueField
         }, (error) => {
             setSending(false);
             if (error) {
@@ -41,8 +46,12 @@ const UpdateScheduleModal = (props) => {
         });
     }
 
-    const rulesTextareaChange = (event) => {
-        setRulesTextarea(event.target.value);
+    const venueFieldChange = (event) => {
+        setVenue(event.target.value);
+    }
+
+    const timeFieldChange = (event) => {
+        setTimeField(event.target.value)
     }
 
     const eventNameInputChange = (event) => {
@@ -61,7 +70,7 @@ const UpdateScheduleModal = (props) => {
             <Modal show={props.show} onHide={props.handleClose} animation={true}>
                 <form style={{ padding: '40px' }} onSubmit={handleSubmit}>
                     <div className="form-row">
-                        <div className="form-group col-md-8">
+                        <div className="form-group col-md-3">
                             <label for="inputEmail4">EVENT NAME</label>
                             <input type="text"
                                 className="form-control"
@@ -72,52 +81,58 @@ const UpdateScheduleModal = (props) => {
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-4">
-                            <label for="inputState">CATEGORY</label>
-                            <select id="inputState" className="form-control" onChange={selectChange} value={selectValue}>
-                                <option>ACE</option>
-                                <option>KING</option>
-                                <option>QUEEN</option>
-                                <option>JACK</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-3">
-                            <label for="inputEmail4">DATE</label>
-                            <input type="date"
-                                className="form-control"
-                                // id="inputEmail4"
-                                // placeholder="eg. Antakshari"
-                                // onChange={eventNameInputChange}
-                                // value={eventNameInput}
-                                required
-                            />
-                        </div>
+
+                        {/* {no need of date} */}
+                        {/* <div className="form-group col-md-2">
+                        <label for="inputEmail4">DATE</label>
+                        <input type="date"
+                            className="form-control"
+                            // id="inputEmail4"
+                            // placeholder="eg. Antakshari"
+                            onChange={eventNameInputChange}
+                            value={eventNameInput}
+                            required
+                        />
+                    </div> */}
+
                         <div className="form-group col-md-3">
                             <label for="inputEmail4">TIME</label>
                             <input type="time"
                                 className="form-control"
                                 // id="inputEmail4"
                                 // placeholder="eg. Antakshari"
-                                // onChange={eventNameInputChange}
-                                // value={eventNameInput}
+                                onChange={timeFieldChange}
+                                value={timeField}
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-3">
                             <label for="inputEmail4">VENUE</label>
                             <input type="text"
                                 className="form-control"
                                 // id="inputEmail4"
-                                placeholder="eg. Auditorium"
-                                onChange={eventNameInputChange}
-                                // value={eventNameInput}
+                                // placeholder="eg. Antakshari"
+                                onChange={venueFieldChange}
+                                value={venueField}
                                 required
                             />
                         </div>
+                        <div className="form-group col-md-2">
+                            <label for="inputState">DAY</label>
+                            <select id="inputState" className="form-control" onChange={selectChange} value={selectValue}>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
                     </div>
 
+                    {sending ? (<ClipLoader
+                        size={30}
+                        color={"#123abc"}
+                        loading={sending}
+                    />)
+                        : (<button type="submit" className="btn btn-primary">UPDATE SCHEDULE</button>)}
 
                 </form>
                 <Modal.Footer>

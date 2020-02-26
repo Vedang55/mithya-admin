@@ -14,10 +14,10 @@ const ScheduleCard = (props) => {
     const handleShow = () => setShow(true);
 
 
-    const deleteEvent = () => {
-        if (window.confirm(`Are you sure you want to delete event ${props.data.name}`)) {
+    const deleteSech = () => {
+        if (window.confirm(`Are you sure you want to delete this event from schedule ${props.data.name}`)) {
             const k = props.data.key;
-            db.ref('events/' + k).set(null, (error) => {
+            db.ref('schedule/' + k).set(null, (error) => {
                 if (error) {
                     alert(`Event ${props.data.name} could not be deleted, please try again`);
                 } else {
@@ -35,21 +35,20 @@ const ScheduleCard = (props) => {
                     <h5 className="card-title">{props.data.name}</h5>
                     <p className="card-text">
                         {/* <Badge variant="dark">Type :</Badge> {props.data.type} */}
-                        <Badge variant="dark">LOCATION </Badge> : Auditorium
+                        <Badge variant="dark">LOCATION </Badge> : {props.data.venue}
                     </p>
-                    <p className="card-text">
-                        {/* <Badge variant="dark">Type </Badge>: {props.data.type} */}
+                    {/* <p className="card-text">
                         <Badge variant="dark">DATE </Badge> : 27-01-2020
+                    </p> */}
+                    
+                    <p className="card-text">
+                        <Badge variant="dark">TIME </Badge> : {props.data.time}
                     </p>
                     <p className="card-text">
-                        {/* <Badge variant="dark">Type </Badge>: {props.data.type} */}
-                        <Badge variant="dark">TIME </Badge> : 1200 Hrs
- :                   </p>
-                    <p className="card-text">
-                        {/* <Badge variant="dark">Type </Badge>: {props.data.type} */}
-                        <Badge variant="dark">DAY </Badge> : 2
+                        <Badge variant="dark">DAY </Badge> : {props.data.day}
                     </p>
                     <button onClick={() => { handleShow() }} className="btn btn-primary">Update Schedule</button> &nbsp;
+                    <button onClick={deleteSech} className="btn btn-danger">Delete Schedule</button>
 
                 </div>
             </div>

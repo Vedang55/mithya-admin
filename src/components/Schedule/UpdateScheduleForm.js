@@ -3,12 +3,13 @@ import firebase from '../../firestore';
 import ClipLoader from "react-spinners/ClipLoader";
 
 var db = firebase.database();
-const eventRef = db.ref('events/');
+const schduleRef = db.ref('schedule/');
 
 const UpdateScheduleForm = (props) => {
-    const [rulesTextarea, setRulesTextarea] = useState('');
+    const [timeField, setTimeField] = useState('');
     const [eventNameInput, setEventNameInput] = useState('');
-    const [selectValue, setSelectValue] = useState('ACE');
+    const [selectValue, setSelectValue] = useState('1');
+    const [venueField, setVenue] = useState('');
     const [sending, setSending] = useState(false);
 
 
@@ -17,25 +18,30 @@ const UpdateScheduleForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSending(true);
-        var newEventRef = eventRef.push();
-        newEventRef.set({
+        var newSechRef = schduleRef.push();
+        newSechRef.set({
             name: eventNameInput,
-            type: selectValue,
-            rules: rulesTextarea
+            day : selectValue,
+            time: timeField,
+            venue : venueField
         }, (error) => {
             setSending(false);
             if (error) {
                 alert('failed to add event, try again');
             } else {
                 alert(`event ${eventNameInput} added sucessfully`);
-                setRulesTextarea('');
-                setEventNameInput('');
+                // setRulesTextarea('');
+                // setEventNameInput('');
             }
         });
     }
 
-    const rulesTextareaChange = (event) => {
-        setRulesTextarea(event.target.value);
+    const venueFieldChange = (event) => {
+        setVenue(event.target.value);
+    }
+
+    const timeFieldChange = (event) => {
+        setTimeField(event.target.value)
     }
 
     const eventNameInputChange = (event) => {
@@ -62,7 +68,9 @@ const UpdateScheduleForm = (props) => {
                             required
                         />
                     </div>
-                    <div className="form-group col-md-2">
+
+                    {/* {no need of date} */}
+                    {/* <div className="form-group col-md-2">
                         <label for="inputEmail4">DATE</label>
                         <input type="date"
                             className="form-control"
@@ -72,15 +80,16 @@ const UpdateScheduleForm = (props) => {
                             value={eventNameInput}
                             required
                         />
-                    </div>
+                    </div> */}
+
                     <div className="form-group col-md-2">
                         <label for="inputEmail4">TIME</label>
                         <input type="time"
                             className="form-control"
                             // id="inputEmail4"
                             // placeholder="eg. Antakshari"
-                            onChange={eventNameInputChange}
-                            value={eventNameInput}
+                            onChange={timeFieldChange}
+                            value={timeField}
                             required
                         />
                     </div>
@@ -90,17 +99,17 @@ const UpdateScheduleForm = (props) => {
                             className="form-control"
                             // id="inputEmail4"
                             // placeholder="eg. Antakshari"
-                            onChange={eventNameInputChange}
-                            value={eventNameInput}
+                            onChange={venueFieldChange}
+                            value={venueField}
                             required
                         />
                     </div>
                     <div className="form-group col-md-2">
                         <label for="inputState">DAY</label>
                         <select id="inputState" className="form-control" onChange={selectChange} value={selectValue}>
-                            <option>DAY-1</option>
-                            <option>DAY-2</option>
-                            <option>DAY-3</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
                         </select>
                     </div>
                 </div>

@@ -35,6 +35,10 @@ const EventCard = (props) => {
                     <p className="card-text">
                         Type : {props.data.type}
                     </p>
+
+                    <p className="card-text">
+                       Image : {props.data.image}
+                    </p>
                     <p className="card-text">
                         Rules :
                     </p>

@@ -5,17 +5,17 @@ import ScheduleCard from '../Schedule/ScheduleCard'
 import ClipLoader from "react-spinners/ClipLoader";
 
 var db = firebase.database();
-const eventRef = db.ref('events/');
+const scheduleRef = db.ref('schedule/');
 
 
 
 const Atab = (props) => {
-    const [eventsList, setEventsList] = useState();
+    const [scheduleList, setscheduleList] = useState();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        eventRef.orderByChild('type').equalTo(props.tab.toUpperCase()).on('value',
+        scheduleRef.orderByChild('day').equalTo(props.tab.toUpperCase()).on('value',
             (snapshot) => {
-                setEventsList(snapshot.val());
+                setscheduleList(snapshot.val());
                 setLoading(false);
             });
     }, []);
@@ -28,14 +28,15 @@ const Atab = (props) => {
             loading={loading}
         />);
     }
+
     else {
         return (
             <div className="tab-content">
                 <div className="tab-pane container active">
                     <div className="row">
                         {
-                            eventsList ? (Object.keys(eventsList).map((key) => {
-                                return <ScheduleCard key={key} data={{ ...eventsList[key], key: key }} />
+                            scheduleList ? (Object.keys(scheduleList).map((key) => {
+                                return <ScheduleCard key={key} data={{ ...scheduleList[key], key: key }} />
                             })) : <p>no data</p>
 
                         }
@@ -57,19 +58,16 @@ const ScheduleTab = (props) => {
 
         <div className="mulday">
             <Tabs id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
-                <Tab eventKey="ace" title="ACE">
-                    <Atab tab={'ace'} />
+                <Tab eventKey="ace" title="Day1">
+                    <Atab tab={'1'} />
                 </Tab>
-                <Tab eventKey="king" title="KING">
-                    <Atab tab={'king'} />
+                <Tab eventKey="king" title="Day2">
+                    <Atab tab={'2'} />
                 </Tab>
-                <Tab eventKey="queen" title="QUEEN">
-                    <Atab tab={'queen'} />
+                <Tab eventKey="queen" title="Day3">
+                    <Atab tab={'3'} />
                 </Tab>
 
-                <Tab eventKey="jack" title="JACK">
-                    <Atab tab={'jack'} />
-                </Tab>
             </Tabs>
         </div>
 
