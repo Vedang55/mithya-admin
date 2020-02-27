@@ -80,13 +80,13 @@ const UpdateModel = (props) => {
                             />
 
                             <br />
-                            <label>Image name</label>
+                            {/* <label>Image name</label>
                             <input type="text"
                                 className="form-control"
                                 placeholder="image name"
                                 onChange={imageTextChange}
                                 value={imageName}
-                            />
+                            /> */}
                         </div>
                         <div className="form-group col-md-4">
                             <label for="inputState">CATEGORY</label>
