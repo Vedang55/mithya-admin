@@ -30,7 +30,7 @@ const UpdateScheduleModal = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSending(true);
-        var updateSechRef = db.ref('schedule/' + props.data.key);
+        var updateSechRef = db.ref('schedule/' + selectValue + '/' + props.data.key);
         updateSechRef.set({
             name: eventNameInput,
             day: selectValue,

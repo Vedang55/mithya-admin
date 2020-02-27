@@ -5,7 +5,7 @@ import ScheduleCard from '../Schedule/ScheduleCard'
 import ClipLoader from "react-spinners/ClipLoader";
 
 var db = firebase.database();
-const scheduleRef = db.ref('schedule/');
+
 
 
 
@@ -13,7 +13,7 @@ const Atab = (props) => {
     const [scheduleList, setscheduleList] = useState();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        scheduleRef.orderByChild('day').equalTo(props.tab.toUpperCase()).on('value',
+        db.ref('schedule/'+props.tab+'/').orderByChild('time').on('value',
             (snapshot) => {
                 setscheduleList(snapshot.val());
                 setLoading(false);

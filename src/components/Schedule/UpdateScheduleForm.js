@@ -18,7 +18,7 @@ const UpdateScheduleForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setSending(true);
-        var newSechRef = schduleRef.push();
+        var newSechRef = db.ref('schedule/'+selectValue+'/').push();
         newSechRef.set({
             name: eventNameInput,
             day : selectValue,

@@ -17,7 +17,7 @@ const ScheduleCard = (props) => {
     const deleteSech = () => {
         if (window.confirm(`Are you sure you want to delete this event from schedule ${props.data.name}`)) {
             const k = props.data.key;
-            db.ref('schedule/' + k).set(null, (error) => {
+            db.ref('schedule/' + props.data.day + '/' + k).set(null, (error) => {
                 if (error) {
                     alert(`Event ${props.data.name} could not be deleted, please try again`);
                 } else {
@@ -40,7 +40,7 @@ const ScheduleCard = (props) => {
                     {/* <p className="card-text">
                         <Badge variant="dark">DATE </Badge> : 27-01-2020
                     </p> */}
-                    
+
                     <p className="card-text">
                         <Badge variant="dark">TIME </Badge> : {props.data.time}
                     </p>
