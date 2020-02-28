@@ -5,6 +5,7 @@ import {
     Button
 } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
+import app from '../firestore'
 
 const Layout = (props) => {
     return (
@@ -32,7 +33,7 @@ const Layout = (props) => {
                                 Schedule
                             </NavLink>
                         </Nav.Link>
-                        <Button variant="danger">LOGOUT</Button>
+                        <Button onClick={() => app.auth().signOut()} variant="danger">LOGOUT</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
