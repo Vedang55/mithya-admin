@@ -5,53 +5,78 @@ import {
 import firebase from '../../firestore';
 import ClipLoader from "react-spinners/ClipLoader";
 
-
-var db = firebase.database();
-const eventRef = db.ref('events/');
+var db = firebase.firestore();
 
 const UpdateHomeModal = (props) => {
-
-    const [rulesTextarea, setRulesTextarea] = useState(props.data.rules);
-    const [eventNameInput, setEventNameInput] = useState(props.data.name);
-    const [selectValue, setSelectValue] = useState(props.data.type.toUpperCase());
+    const [eventNameInput, setEventNameInput] = useState('');
+    const [comp, setcomp] = useState('');
+    const [it, setit] = useState('');
+    const [etc, setetc] = useState('');
+    const [mech, setmech] = useState('');
     const [sending, setSending] = useState(false);
 
-    useEffect(() => {
-        setRulesTextarea(props.data.rules);
-        setEventNameInput(props.data.name);
-        setSelectValue(props.data.type.toUpperCase());
-    }, [props.data]);
 
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        var docRef = db.collection("scores").doc("event_scores");
         setSending(true);
-        var updateEventRef = db.ref('events/' + props.data.key);
-        updateEventRef.set({
-            name: eventNameInput,
-            type: selectValue,
-            rules: rulesTextarea
-        }, (error) => {
-            setSending(false);
-            if (error) {
-                alert('failed to update event, try again');
-            } else {
-                alert(`event ${eventNameInput} updated sucessfully`);
-            }
-        });
+        try {
+            const scoresArrProm = await docRef.get();
+            const scoresArr = scoresArrProm.data().events;
+            scoresArr.push({
+                name: eventNameInput,
+                comp: comp,
+                it: it,
+                etc: etc,
+                mech: mech
+            });
+            let comptotal = 0, etctotal = 0, ittotal = 0, mechtotal = 0;
+            scoresArr.forEach(element => {
+                comptotal += parseInt(element.comp);
+                etctotal += parseInt(element.etc);
+                ittotal += parseInt(element.it);
+                mechtotal += parseInt(element.mech);
+            });
+
+
+            var batch = db.batch();
+
+            batch.set(docRef, {
+                events: scoresArr
+            })
+
+
+            var totalref = db.collection("scores").doc("EY0IyJetTl5wc1B51Vid");
+
+            batch.set(totalref, {
+                comp: comptotal,
+                it: ittotal,
+                etc: etctotal,
+                mech: mechtotal
+            });
+
+            batch.commit().then(() => {
+                alert('score updated sucessfully')
+
+            }).catch((e) => {
+                alert(e);
+            })
+
+        }
+        catch (e) {
+            alert(e)
+        }
+
+        setSending(false)
+
     }
 
-    const rulesTextareaChange = (event) => {
-        setRulesTextarea(event.target.value);
-    }
 
     const eventNameInputChange = (event) => {
         setEventNameInput(event.target.value);
     }
 
-    const selectChange = (event) => {
-        setSelectValue(event.target.value);
-    }
+
 
 
 
@@ -59,7 +84,8 @@ const UpdateHomeModal = (props) => {
 
         <div style={{ padding: '40px' }}>
             <Modal show={props.show} onHide={props.handleClose} animation={true}>
-                <form style={{ padding: '40px' }} onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
+                    {/* Event Name Row */}
                     <div className="form-row">
                         <div className="form-group col-md-12">
                             <label for="inputEmail4">EVENT NAME</label>
@@ -74,56 +100,58 @@ const UpdateHomeModal = (props) => {
                         </div>
                     </div>
                     <div className="form-row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-3">
                             <label for="inputEmail4">COMP</label>
                             <input type="text"
                                 className="form-control"
                                 // id="inputEmail4"
-                                placeholder="eg. 2000"
-                                onChange={eventNameInputChange}
-                                value={eventNameInput}
+                                placeholder="comp score"
+                                onChange={(event) => { setcomp(event.target.value) }}
+                                value={comp}
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-6">
-                            <label for="inputEmail4">ETC</label>
-                            <input type="text"
-                                className="form-control"
-                                // id="inputEmail4"
-                                placeholder="eg. 2000"
-                                onChange={eventNameInputChange}
-                                value={eventNameInput}
-                                required
-                            />
-                        </div>
-
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-3">
                             <label for="inputEmail4">MECH</label>
                             <input type="text"
                                 className="form-control"
                                 // id="inputEmail4"
-                                placeholder="eg. 2000"
-                                onChange={eventNameInputChange}
-                                value={eventNameInput}
+                                placeholder="mech score"
+                                onChange={(event) => { setmech(event.target.value) }}
+                                value={mech}
                                 required
                             />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-3">
+                            <label for="inputEmail4">ETC</label>
+                            <input type="text"
+                                className="form-control"
+                                // id="inputEmail4"
+                                placeholder="etc score"
+                                onChange={(event) => { setetc(event.target.value) }}
+                                value={etc}
+                                required
+                            />
+                        </div>
+                        <div className="form-group col-md-3">
                             <label for="inputEmail4">IT</label>
                             <input type="text"
                                 className="form-control"
                                 // id="inputEmail4"
-                                placeholder="eg. 2000"
-                                onChange={eventNameInputChange}
-                                value={eventNameInput}
+                                placeholder="it score"
+                                onChange={(event) => { setit(event.target.value) }}
+                                value={it}
                                 required
                             />
                         </div>
-
                     </div>
 
+                    {sending ? (<ClipLoader
+                        size={30}
+                        color={"#123abc"}
+                        loading={sending}
+                    />)
+                        : (<button type="submit" className="btn btn-primary">ADD SCORE</button>)}
 
                 </form>
                 <Modal.Footer>
